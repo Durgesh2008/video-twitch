@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  nextjs:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306" 
