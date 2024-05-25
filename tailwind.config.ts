@@ -77,9 +77,10 @@ const config = {
         'rebtn': 'linear-gradient(90deg,  #3498db 0%, #1abc9c 100%)',
         'btn2': 'linear-gradient(to left, #378CE7, #67C6E3 29%)',
         'rebtn2': 'linear-gradient(to left, #67C6E3, #378CE7 29%)',
-        'cover':  'radial-gradient(circle at right, #5DEBD7, #C5FF95)',
-        'circle': 'repeating-radial-gradient(circle, #67C6E3, #378CE7 20%)',
+        'cover':  'radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%)',
+        'circle': 'repeating-radial-gradient(circle, #151515, #002379 5%)',
       })
+
     },
   },
   plugins: [require("tailwindcss-animate")],

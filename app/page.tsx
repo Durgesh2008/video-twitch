@@ -1,14 +1,15 @@
 import React from 'react'
+import { UserButton } from '@clerk/nextjs'
+
+
 import { authorFont, outfitFont, satoshiFont } from './font'
-import { Button } from '@/components/ui/button'
+
 
 const page = () => {
   return (
     <>
     <div className='mx-10 my-10 '>
-    <Button variant="destructive">
-      Cilck met 
-    </Button>
+    <UserButton afterSignOutUrl='/sign-in'/>
     </div>
    
     </>
