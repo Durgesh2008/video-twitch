@@ -9,9 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'btn': 'linear-gradient(90deg, #1abc9c 0%, #3498db 100%)',
+        'rebtn': 'linear-gradient(90deg,  #3498db 0%, #1abc9c 100%)',
+        'btn2': 'linear-gradient(to left, #378CE7, #67C6E3 29%)',
+        'rebtn2': 'linear-gradient(to left, #67C6E3, #378CE7 29%)',
+        'cover':  'radial-gradient(circle at right, #5DEBD7, #C5FF95)',
+        'circle': 'repeating-radial-gradient(circle, #67C6E3, #378CE7 20%)',
+      },
+      fontFamily: {
+        author: ['var(--font-author)']  ,
+        satoshi: ['var(--font-satoshi)'],
+        outfit: ['var(--font-outfit)']
       },
     },
   },
