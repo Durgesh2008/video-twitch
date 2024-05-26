@@ -4,7 +4,7 @@ const page = () => {
   return (
     <>
     <div className='relative top-20'>
-    <p className='text-white'>This is auhtorizes page </p>
+    <p className='text-white'>Home page </p>
     </div>
    
     </>

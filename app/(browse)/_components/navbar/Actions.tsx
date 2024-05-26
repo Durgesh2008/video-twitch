@@ -1,4 +1,4 @@
-import { satoshiFont } from '@/app/font'
+import { outfitFont, satoshiFont } from '@/app/font'
 import { Button } from '@/components/ui/button'
 import { SignInButton, UserButton } from '@clerk/nextjs'
 import { currentUser } from '@clerk/nextjs/server'
@@ -12,8 +12,12 @@ const Actions = async() => {
     <div className='flex justify-end items-center gap-x-2 ml-4 lg:ml-0'>
         {
             !user && 
-            <SignInButton>
-                <Button>
+            <SignInButton >
+                <Button
+                size='sm'
+                variant="primary"
+                className='rounded shadow-lg'
+                >
                     Login
                 </Button>
             </SignInButton>

@@ -19,8 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        custombtn :`${satoshiFont.className} text-white bg-btn hover:bg-rebtn capitalize `,
-        custombtn2 :`${outfitFont.className} text-black font-semibold capitalize bg-btn2 hover:bg-rebtn2 `
+        primary :`${outfitFont.className} text-primary  bg-blue-600 hover:bg-blue-600/80 `
       },
       size: {
         default: "h-10 px-4 py-2",
