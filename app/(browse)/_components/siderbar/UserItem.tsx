@@ -13,7 +13,7 @@ import React from "react";
 interface UserItemProps {
   username: string;
   profilepic: string;
-  islive: Boolean;
+  islive?: Boolean;
 }
 
 const UserItem = ({ username, profilepic, islive }: UserItemProps) => {
@@ -32,7 +32,7 @@ const UserItem = ({ username, profilepic, islive }: UserItemProps) => {
         <UserAvatar
         username={username}
          profilepic={profilepic}
-          islive = {true}
+          islive = {islive}
      
         />
         {
@@ -54,6 +54,7 @@ const UserItem = ({ username, profilepic, islive }: UserItemProps) => {
 };
 
 export default UserItem;
+
 export const UserItemSkeleton = ()=>{
 
  return(

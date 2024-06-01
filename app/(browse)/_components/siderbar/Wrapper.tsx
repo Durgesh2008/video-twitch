@@ -3,6 +3,7 @@ import { useSidebar } from '@/store/use-sidbar'
 import React, { useEffect, useState } from 'react'
 import { ToggleSkeloton } from './Toggle'
 import { RecommendedSkeleton } from './Recommened'
+import { FollowingSkeleton } from './Following'
 interface WrapperType{
     children:React.ReactNode
 }
@@ -16,6 +17,7 @@ const Wrapper = ({children}:WrapperType) => {
     if (!isCLient) return (
       <aside className={`fixed left-0  flex flex-col h-full bg-[#252731] border-r border-[#2d2e35] z-50 top-20 w-[70px] lg:w-60 transition-all delay-150 duration-300`}>
         <ToggleSkeloton/>
+        <FollowingSkeleton/>
         <RecommendedSkeleton/>
       </aside>
     );

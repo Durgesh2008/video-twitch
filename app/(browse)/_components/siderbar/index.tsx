@@ -1,17 +1,22 @@
 import React from 'react'
 import Wrapper from '@/app/(browse)/_components/siderbar/Wrapper'
-import Toggle from '@/app/(browse)/_components/siderbar/Toggle'
+import Toggle, { ToggleSkeloton } from '@/app/(browse)/_components/siderbar/Toggle'
 import Recommened, { RecommendedSkeleton } from '@/app/(browse)/_components/siderbar/Recommened'
 import { getRecommended } from '@/lib/recommended-service'
+import { getFolloweredUsers } from '@/lib/follow-service'
+import Following, { FollowingSkeleton } from './Following'
 
 const SideBar = async() => {
   const recommeded = await getRecommended()
+  const following = await getFolloweredUsers()
   return (
     <>
     <Wrapper>
         <Toggle/>
         <div className='space-y-4 pt-4 lg:pt-0'>
-          <Recommened data={recommeded}/>
+        <Following data={following}/>
+         <Recommened data={recommeded}/>
+        
         </div>
     </Wrapper>
     </>
@@ -21,8 +26,12 @@ const SideBar = async() => {
 
 export const SideBarSkeleton = ()=>{
   return(
-    <aside className='fixed left-0 flex flex-col w-[70px] lg:w-60 h-full bg-background border-r border-[#2D2E35] z-50'>
+    <aside className="fixed left-0  flex flex-col h-full bg-[#252731] border-r border-[#2d2e35] z-50 top-20  transition-all delay-150 duration-300 ">
+     <ToggleSkeloton/>
+     <FollowingSkeleton/>
       <RecommendedSkeleton/>
+     
+    
     </aside>
   )
 }

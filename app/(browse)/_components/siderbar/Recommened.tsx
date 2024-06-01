@@ -24,7 +24,8 @@ const Recommened = ({ data }: RecommenedProps) => {
             Recommended
           </p>
         </div>
-      )}
+      )
+      }
 
       <ul className="space-y-2 px-2">
         {data?.map((ele) => <UserItem key={ele.id} username={ele.username} profilepic={ele.imageUrl} islive = {true}/>)}

@@ -1,4 +1,5 @@
 "use client"
+import { onBlock, onUnBlock } from '@/actions/block'
 import { onFollow, onUnFollow } from '@/actions/follow'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
@@ -38,23 +39,56 @@ const Action = ({isFollowing,userid}:ActionProps) => {
         })
     }
    
-    const onClick = ()=>{
+    const handleBlock = ()=>{
+      startTransition(()=>{
+          onBlock(userid)
+          .then((data)=>toast.success(`you are blocked ${data.blocked.username}`))
+          .catch((error)=>toast.error(`${error}`))
+      })
+    }
+
+    const handleUnBlock = ()=>{
+      startTransition(()=>{
+        onUnBlock(userid)
+        .then((data)=>toast.success(`you are unblock ${data.blocked.username}`))
+        .catch((error)=>toast.error(`${error}`))
+      })
+    }
+    
+    const onClickBtn1 = ()=>{
   if (isFollowing) {
     handleUnfollow()
   }else{
     handleFollow()
   }
     }
+
+    const onClickBtn2 = ()=>{
+
+    }
   return (
-   <Button 
+    <>
+     <Button 
     disabled = {isPending }
      variant={`${isFollowing ? 'destructive':'primary'}` }
-     onClick={ onClick}>
+     onClick={ onClickBtn1}>
     {
         isPending &&  <Loader2 className="mr-2  h-4 w-4 animate-spin" />
     }
    { isFollowing ? "Unfollow":"Follow"}
    </Button>
+   <Button 
+    disabled = {isPending }
+     variant='destructive' 
+     onClick={ onClickBtn2}>
+    {
+        isPending &&  <Loader2 className="mr-2  h-4 w-4 animate-spin" />
+    }
+Block
+   </Button>
+    </>
+
+   
   )
 }
 
