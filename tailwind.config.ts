@@ -73,8 +73,8 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       backgroundImage: theme => ({
-        'btn': 'linear-gradient(90deg, #1abc9c 0%, #3498db 100%)',
-        'rebtn': 'linear-gradient(90deg,  #3498db 0%, #1abc9c 100%)',
+        'btn': 'linear-gradient(108.3deg, rgb(202, 73, 118) 15.2%, rgb(255, 84, 84) 99.3%)',
+        'rebtn': 'linear-gradient(108.3deg, rgb(202, 73, 118) 15.2%, rgb(255, 84, 84) 99.3%)',
         'btn2': 'linear-gradient(to left, #378CE7, #67C6E3 29%)',
         'rebtn2': 'linear-gradient(to left, #67C6E3, #378CE7 29%)',
         'cover':  'radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%)',
@@ -82,6 +82,7 @@ const config = {
       })
 
     },
+
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config

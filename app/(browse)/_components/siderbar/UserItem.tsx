@@ -1,8 +1,10 @@
 "use client"
 import { satoshiFont } from "@/app/font";
+import LiveBadge from "@/components/Live-Badge";
 import UserAvatar from "@/components/UserAvatar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/store/use-sidbar";
 import Link from "next/link";
@@ -33,6 +35,16 @@ const UserItem = ({ username, profilepic, islive }: UserItemProps) => {
           islive = {true}
      
         />
+        {
+          !collapsed && <p className="truncate">
+            {username}
+          </p>
+        }
+        {
+          !collapsed && islive && (
+            <LiveBadge className="ml-auto"/>
+          )
+        }
             </div>
         </Link>
     
@@ -42,3 +54,15 @@ const UserItem = ({ username, profilepic, islive }: UserItemProps) => {
 };
 
 export default UserItem;
+export const UserItemSkeleton = ()=>{
+
+ return(
+  <li className=" flex items-center gap-x-4 px-3 py-2">
+  <Skeleton className="min-h-[32px] min-w-[32px] rounded-full"/>
+  <div className="flex-1" >
+  <Skeleton className="h-6"/>
+  </div>
+  
+    </li>
+ )
+}

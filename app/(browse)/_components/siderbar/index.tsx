@@ -1,7 +1,7 @@
 import React from 'react'
 import Wrapper from '@/app/(browse)/_components/siderbar/Wrapper'
 import Toggle from '@/app/(browse)/_components/siderbar/Toggle'
-import Recommened from '@/app/(browse)/_components/siderbar/Recommened'
+import Recommened, { RecommendedSkeleton } from '@/app/(browse)/_components/siderbar/Recommened'
 import { getRecommended } from '@/lib/recommended-service'
 
 const SideBar = async() => {
@@ -18,4 +18,12 @@ const SideBar = async() => {
   )
 }
 
+
+export const SideBarSkeleton = ()=>{
+  return(
+    <aside className='fixed left-0 flex flex-col w-[70px] lg:w-60 h-full bg-background border-r border-[#2D2E35] z-50'>
+      <RecommendedSkeleton/>
+    </aside>
+  )
+}
 export default SideBar

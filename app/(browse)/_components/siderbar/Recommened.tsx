@@ -4,7 +4,7 @@ import { satoshiFont } from "@/app/font";
 import { useSidebar } from "@/store/use-sidbar";
 import { User } from "@prisma/client";
 import React from "react";
-import UserItem from "./UserItem";
+import UserItem, { UserItemSkeleton } from "./UserItem";
 
 interface RecommenedProps {
   data: User[];
@@ -27,10 +27,26 @@ const Recommened = ({ data }: RecommenedProps) => {
       )}
 
       <ul className="space-y-2 px-2">
-        {data?.map((ele) => <UserItem key={ele.id} username={ele.username} profilepic={ele.imageUrl} islive = {false}/>)}
+        {data?.map((ele) => <UserItem key={ele.id} username={ele.username} profilepic={ele.imageUrl} islive = {true}/>)}
       </ul>
     </div>
   );
 };
 
 export default Recommened;
+export const RecommendedSkeleton = ()=>{
+  return(
+    <ul className="px-2">
+    {
+      [...Array(3)].map((_,i)=>{
+        return(
+          <UserItemSkeleton key={i}/>
+        )
+      })
+    
+    }
+      </ul>
+  )
+ 
+
+}

@@ -2,6 +2,7 @@
 import { satoshiFont } from '@/app/font';
 import Hint from '@/components/Hint';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useSidebar } from '@/store/use-sidbar';
 import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react';
 import React from 'react'
@@ -48,3 +49,12 @@ const Toggle = () => {
 }
 
 export default Toggle
+export const ToggleSkeloton = ()=>{
+    return(
+        <div className='p-3 pl-3 mb-6 hidden lg:flex justify-between w-full'>
+            <Skeleton className='h-6 w-[100px]'/>
+            <Skeleton className='h-6 w-6'/>
+
+        </div>
+    )
+}
