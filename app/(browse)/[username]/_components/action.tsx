@@ -3,17 +3,25 @@ import { onBlock, onUnBlock } from '@/actions/block'
 import { onFollow, onUnFollow } from '@/actions/follow'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
+import { notFound } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
 
 interface ActionProps{
     isFollowing:boolean
+    isBlockingByThisUser:boolean
+    isBlocking:boolean
     userid:string
 }
 
-const Action = ({isFollowing,userid}:ActionProps) => {
+const Action = ({isFollowing,isBlockingByThisUser,isBlocking,userid}:ActionProps) => {
     const [isPending,startTransition ] = useTransition()
     
+
+    if (isBlockingByThisUser){
+      notFound()
+    }
+
     const handleFollow = ()=>{
         startTransition(()=>{
             onFollow(userid)
@@ -64,6 +72,15 @@ const Action = ({isFollowing,userid}:ActionProps) => {
     }
 
     const onClickBtn2 = ()=>{
+      if (isBlocking){
+        handleUnBlock()
+      }else{
+        handleBlock()
+      }
+      // 
+    
+    
+   
 
     }
   return (
@@ -79,12 +96,15 @@ const Action = ({isFollowing,userid}:ActionProps) => {
    </Button>
    <Button 
     disabled = {isPending }
-     variant='destructive' 
+    variant={`${isBlocking ? 'destructive':'primary'}` }
      onClick={ onClickBtn2}>
     {
         isPending &&  <Loader2 className="mr-2  h-4 w-4 animate-spin" />
     }
-Block
+{
+  isBlocking ? "Unblock" :"Block"
+}
+   
    </Button>
     </>
 

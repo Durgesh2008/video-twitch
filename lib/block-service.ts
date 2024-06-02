@@ -2,6 +2,39 @@ import { error } from "console";
 import { getself } from "./auth-service";
 import { db } from "./db";
 
+export const isBlocking = async (id: string) => {
+  try {
+    const self = await getself();
+
+    if (!self) {
+      throw new Error("please login for blocking user");
+    }
+    const exituser = await db.user.findUnique({
+      where: { id },
+    });
+
+    if (!exituser) {
+      throw new Error("user not found");
+    }
+
+    if (exituser.id === self.id) {
+      return false;
+    }
+    const existBlocked = await db.block.findUnique({
+      where: {
+        blockerId_blockedId: {
+          blockerId:self.id,
+          blockedId:id,
+        },
+      },
+    });
+
+    return !!existBlocked;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const isBlockedByUser = async (id: string) => {
   try {
     const self = await getself();
@@ -23,8 +56,8 @@ export const isBlockedByUser = async (id: string) => {
     const existBlocked = await db.block.findUnique({
       where: {
         blockerId_blockedId: {
-          blockerId: id,
-          blockedId: self.id,
+          blockerId:id,
+          blockedId:self.id,
         },
       },
     });

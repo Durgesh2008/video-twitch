@@ -3,6 +3,7 @@ import { getUserByUsername } from '@/lib/user-service'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import Action from './_components/action'
+import { isBlockedByUser, isBlocking } from '@/lib/block-service'
 interface UserProps{
     params:{
         username:string
@@ -15,6 +16,8 @@ const UserPage = async({params}:UserProps) => {
   notFound()
     }
     const isfollowing = await isFollowingUser(user.id);
+    const isBlockingByThisUser = await  isBlockedByUser(user.id)
+    const isBlockingbyYou = await isBlocking(user.id)
   return (
     <div className='text-white relative top-20 flex flex-col gap-y-4 ml-3'>
     <p>
@@ -25,7 +28,10 @@ const UserPage = async({params}:UserProps) => {
     id:{user.id}
     </p>
     <p>{`${isfollowing}`}</p>
-    <Action isFollowing = {isfollowing} userid={user.id}/>
+    <p>
+      isBlocking--{`${isBlockingbyYou}`}
+    </p>
+    <Action isFollowing = {isfollowing} isBlockingByThisUser={isBlockingByThisUser} isBlocking={isBlockingbyYou} userid={user.id}/>
         </div>
   )
 }
