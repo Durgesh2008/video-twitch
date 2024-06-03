@@ -3,24 +3,27 @@ datasource db {
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
- 
+
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 model User {
-  id             String   @id @default(uuid())
-  username       String   @unique
-  imageUrl       String   @db.Text
-  externalUserId String   @unique
-  bio            String?  @db.Text
+  id             String  @id @default(uuid())
+  username       String  @unique
+  imageUrl       String  @db.Text
+  externalUserId String  @unique
+  bio            String? @db.Text
 
-  following      Follow[] @relation("Following")
-  followedBy     Follow[] @relation("FollowedBy")
-  blocking       Block[] @relation("Blocking")
-  blockedBy       Block[] @relation("BlockedBy")
-  createdAt      DateTime @default(now())
-  updateAt       DateTime @updatedAt
+  following  Follow[] @relation("Following")
+  followedBy Follow[] @relation("FollowedBy")
+  blocking   Block[]  @relation("Blocking")
+  blockedBy  Block[]  @relation("BlockedBy")
+
+  stream    Stream?
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
 }
 
 model Follow {
@@ -37,17 +40,40 @@ model Follow {
   @@index([followingId])
 }
 
-
 model Block {
-  id          String   @id @default(uuid())
-  blockerId  String // fk   // us user ki id jo kisi ko follow kiya
+  id        String   @id @default(uuid())
+  blockerId String // fk   // us user ki id jo kisi ko follow kiya
   blockedId String //fk // us user ki id jo follow huaa 
-  createdAt   DateTime @default(now())
-  updateAt    DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
   blocker   User     @relation(name: "Blocking", fields: [blockerId], references: [id], onDelete: Cascade)
   blocked   User     @relation(name: "BlockedBy", fields: [blockedId], references: [id], onDelete: Cascade)
 
   @@unique([blockerId, blockedId])
   @@index([blockerId])
   @@index([blockedId])
+}
+
+model Stream {
+  id           String  @id @default(uuid())
+  name         String  @db.Text
+  thumbnaikUrl String? @db.Text
+
+  ingresId  String? @unique
+  serverUrl String? @db.Text
+  streamKey String? @db.Text
+
+  isLive              Boolean @default(false)
+  isChatEnable        Boolean @default(true)
+  isChatDelayed       Boolean @default(false)
+  isChatFollowersOnly Boolean @default(false)
+
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+
+  @@index([userId])
+  @@index([ingresId])
+  @@fulltext([name])
 }
