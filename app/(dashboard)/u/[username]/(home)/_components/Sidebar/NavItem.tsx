@@ -24,9 +24,9 @@ const NavItem = ({route,isActive}:NavItemProps) => {
 <Button
 asChild
 value="ghost"
-className={cn("w-full h-12",
+className={cn("w-full h-12 text-foreground",
     collapsed ? "justify-center":"justify-start",
-    isActive && "bg-accent"
+    isActive && "bg-white rounded text-blue-400"
 )}
 >
     <Link href={href}>
